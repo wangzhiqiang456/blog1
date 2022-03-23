@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}首页{% endblock %}
+
+{% block left %}
+    <div id="main">
+        {% for post in postlist %}        <!--遍历所有帖子进行for循环-->
+            <article class="article article-type-post">
+            <div class="article-meta">
+                <a class="article-date">
+                    <time>{{ post.created|date:'Y-m-d H:i:s' }}</time>   <!--注意时间格式-->
+                </a>
+                <div class="article-category">                               <!--类别中的内容名称-->
+                    <a class="article-category-link" href="#" target="_blank">{{ post.category.cname }}</a>
+                </div>
+            </div>
+            <div class="article-inner">
+                <header class="article-header">
+                    <h1 itemprop="name">                               <!--博客的标题-->
+                        <a class="article-title" href="#" target="_blank">{{ post.title }}</a>
+                    </h1>
+                </header>
+                <div class="article-entry" itemprop="articleBody">
+                    <h2>前言</h2>
+                    <hr>
+                    {{ post.desc }}  <!--简介-->
+
+
+                    <p class="article-more-link">
+                        <a href="/post/{{ post.id }}" target="_blank">阅读全文</a>
+                    </p>
+                </div>
+                <footer class="article-footer">
+                    <a data-url="存放文章的url" class="article-share-link">分享</a>
+                    <ul class="article-tag-list">
+
+                        {% for t in post.tag.all %}   <!--对所有的我们设置好的标签进行遍历循环-->
+                           <li class="article-tag-list-item">
+                               <a class="article-tag-list-link" href="#">{{ t.tname }}</a>  <!--遍历后的标签的名字-->
+                           </li>
+                        {% endfor %}
+
+                    </ul>
+                </footer>
+            </div>
+        </article>   <!--article这一部分指的是博客的中间部分-->
+        {% endfor %}
+
+        <nav id="page-nav">
+                {% if postlist.has_previous %}
+                    <a class="extend next" rel="next" href="/page/{{ postlist.previous_page_number }}">上一页</a>
+                {% endif %}
+
+                {% for page in pagelist %}
+                    {% if currentNum == page %}
+                        <span class="page-number current">{{ page }}</span>   <!--加粗-->
+                    {% else %}
+                        <a class="page-number" href="/page/{{ page }}">{{ page }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if postlist.has_next %}
+                    <a class="extend next" rel="next" href="/page/{{ postlist.next_page_number }}">下一页</a>
+                {% endif %}
+        </nav>    <!--进行分页-->
+    </div>
+{% endblock %}

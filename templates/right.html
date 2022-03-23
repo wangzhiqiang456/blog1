@@ -1,0 +1,60 @@
+ <aside id="sidebar">
+     <!--分类-->
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list">
+
+            {% for cp in r_catepost %}
+                <li class="category-list-item">
+                  <a class="category-list-link" href="/category/{{ cp.category }}">{{ cp.category__cname }}</a>
+                  <span class="category-list-count">{{ cp.c }}</span>  <!--cp.category指的是每一类的id-->
+                </li>                          <!--cp.c指的是记录数-->
+            {% endfor %}
+
+      </ul>
+      </div>
+  </div>
+
+     <!--归档-->
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list">
+          {% for fp in r_filepost %}
+                <li class="archive-list-item">
+                  <a class="archive-list-link" href="/archive/{{ fp.0|date:'Y' }}/{{ fp.0|date:'m' }}">{{ fp.0|date:'Y年m月' }}</a>
+                  <span class="archive-list-count">{{ fp.1 }}</span>                               <!--fp.0指的是第一个元组：日期-->
+                </li>
+          {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+    <!--近期文章-->
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+          {% for rp in r_recpost %}
+            <li>
+                <a href="/post/{{ rp.id }}" target="_blank">{{ rp.title|truncatechars:10 }}</a>
+            </li>                             <!--truncatechars:10对选取的近期文章进行部分显示，多余的字以省略字代替-->
+          {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+          <li>
+            <a href="http://www.bjsxt.com/" target="_blank">尚学堂</a>
+          </li>
+          <li>
+            <a href="http://www.sxt.cn/" target="_blank">速学堂</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</aside>

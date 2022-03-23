@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load myfilter %}   <!--自定义过滤器,让内容可以正常换行,对内容自动解析-->
+{% block title %}
+    详情页面
+{% endblock %}
+
+{% block left %}
+    <article class="article article-type-post">
+            <div class="article-meta">
+                <a class="article-date">
+                    <time>{{ post.created|date:'Y-m-d H:i:s' }}</time>
+                </a>
+                <div class="article-category">
+                    <a class="article-category-link" href="#" target="_blank">{{ post.category.cname }}</a>
+                </div>
+            </div>
+            <div class="article-inner">
+                <header class="article-header">
+                    <h1 itemprop="name">
+                        <a class="article-title" href="#" target="_blank">{{ post.title }}</a>
+                    </h1>
+                </header>
+                <div class="article-entry" itemprop="articleBody">
+                     <h2>前言</h2>
+                        {{ post.desc }}
+                    <hr>
+                        {{ post.content|md|safe }}
+
+                </div>
+            </div>
+    </article>
+    <div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+{% endblock %}

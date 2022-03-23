@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    搜索结果列表
+{% endblock %}
+
+{% block left %}
+
+    <div id="main">
+
+        <div class="archives">
+
+            {% if query %}
+            {% for post in page.object_list %}
+
+                <article class="archive-article archive-type-post">
+                  <div class="archive-article-inner">
+                    <header class="archive-article-header">
+                    <a href="#" class="archive-article-date">
+                         <time>{{ post.object.created|date:'Y-m' }}</time>
+                    </a>
+
+                     <h1 itemprop="name">
+                          <a class="archive-article-title" target="_blank" href="/post/{{ post.object.id }}">{{ post.object.title }}</a>
+                     </h1>
+                     </header>
+                  </div>
+                </article>
+            {% empty %}
+                未查询到结果信息。
+
+            {% endfor %}
+
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

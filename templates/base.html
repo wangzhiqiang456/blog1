@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://hello123.pythonanywhere.com/ -->
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>{% block title %}{% endblock %}</title> <!--这里进行标题填存-->
+        <link rel="stylesheet" type="text/css" href="/static/style.css">   <!--在settings.py文件中添加STATICFILES_DIRS，写明style.css路径-->
+        <style>
+             form {
+                  position: relative;
+                  width: 150px;
+                  margin: 0 auto;
+                  }
+             .d1{
+                  float: right;
+                  line-height: 67px;
+                  }
+             .d1 input {
+                  width: 100px;
+                  height: 30px;
+                  border: 2px solid darkred;
+                  border-radius: 5px;
+                  outline: none;
+                  background: white;
+                  color: #1e242a;
+                  }
+        </style>
+        {% block headerjs %}   <!--填存布局顶部的地方-->
+
+        {% endblock %}
+    </head>
+    <body>
+        <div id="container">
+                <div id="wrap">
+                    {% include 'header.html' %}    <!--顶部的html-->
+
+                    <div class="outer">
+                        {% block left %}   <!--布局的主题部分即左面的内容-->
+
+                        {% endblock %}
+
+                        {% include 'right.html' %}    <!--右面部分的html-->
+                    </div>
+
+                    {% include 'footer.html' %}    <!--底部部分的html-->
+
+                </div>
+            </div>
+
+    </body>
+
+</html>
